@@ -74,16 +74,6 @@
   -webkit-line-clamp: 2;
 }
 
-.breaking-news__meta {
-  display: grid;
-  gap: 8px;
-  justify-items: end;
-  color: var(--text-soft);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
 .breaking-news__subhead {
   margin-top: 16px;
   max-width: 65ch;
@@ -133,7 +123,6 @@
 .market-board__intro,
 .host-panel__intro,
 .host-panel__footer,
-.host-panel__status,
 .host-panel__inline-action,
 .bean-card__header,
 .bean-card__pricing,
@@ -232,7 +221,6 @@
 
 .bean-card__ticker,
 .bean-card__sentiment,
-.host-panel__status,
 .host-panel__copy,
 .bean-card__previous {
   font-size: 0.82rem;
@@ -277,7 +265,7 @@
 }
 
 .host-panel__copy {
-  margin-top: 12px;
+  margin: 0 0 8px;
   color: var(--text-soft);
 }
 
@@ -287,6 +275,12 @@
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.05);
   color: var(--text-soft);
+}
+
+.host-panel__status strong {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
 }
 
 .host-panel__actions,
@@ -396,7 +390,6 @@ select:hover {
   .breaking-news__headline-row,
   .market-board__intro,
   .host-panel__footer,
-  .host-panel__status,
   .host-panel__inline-action {
     flex-direction: column;
     align-items: stretch;

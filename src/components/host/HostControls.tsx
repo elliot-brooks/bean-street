@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import type { BeanDefinition, BeanId } from '../../types/market'
+import type { BeanDefinition, BeanId, MarketEvent } from '../../types/market'
 
 interface HostControlsProps {
   beanOptions: BeanDefinition[]
-  signalCount: number
-  activeEventCount: number
+  latestEvent?: MarketEvent
   onRandomizeMarket: () => void
   onRandomEvent: () => void
   onSell: (beanId: BeanId) => void
@@ -12,10 +11,32 @@ interface HostControlsProps {
   onReset: () => void
 }
 
+const describeEvent = (event: MarketEvent | undefined, beanOptions: BeanDefinition[]): string => {
+  if (!event) {
+    return 'No events yet.'
+  }
+
+  const getBeanName = (beanId: BeanId): string => {
+    return beanOptions.find((bean) => bean.id === beanId)?.name ?? beanId
+  }
+
+  switch (event.type) {
+    case 'selloff':
+      return `${getBeanName(event.target)} marked sold.`
+    case 'trade':
+      return `${getBeanName(event.targets[0])} and ${getBeanName(event.targets[1])} marked traded.`
+    case 'random':
+      return event.target === 'market'
+        ? `Random event: ${event.label} hit the whole market.`
+        : `Random event: ${event.label} hit ${getBeanName(event.target)}.`
+    default:
+      return event satisfies never
+  }
+}
+
 export function HostControls({
   beanOptions,
-  signalCount,
-  activeEventCount,
+  latestEvent,
   onRandomizeMarket,
   onRandomEvent,
   onSell,
@@ -25,6 +46,7 @@ export function HostControls({
   const [sellBean, setSellBean] = useState<BeanId>(beanOptions[0].id)
   const [tradeFirst, setTradeFirst] = useState<BeanId>(beanOptions[0].id)
   const [tradeSecond, setTradeSecond] = useState<BeanId>(beanOptions[1]?.id ?? beanOptions[0].id)
+  const latestEventSummary = describeEvent(latestEvent, beanOptions)
 
   return (
     <div className="host-panel">
@@ -34,8 +56,8 @@ export function HostControls({
       </div>
 
       <div className="host-panel__status">
-        <span>{signalCount - 1} signals fired</span>
-        <span>{activeEventCount} recent signals</span>
+        <p className="host-panel__copy">Latest event</p>
+        <strong>{latestEventSummary}</strong>
       </div>
 
       <div className="host-panel__actions">

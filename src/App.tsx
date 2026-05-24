@@ -50,19 +50,14 @@ function App() {
   return (
     <AppShell
       banner={
-        <BreakingNewsBanner
-          headline={market.latestHeadline}
-          signalCount={market.tick}
-          activeEventCount={market.activeEvents.length}
-        />
+        <BreakingNewsBanner headline={market.latestHeadline} />
       }
       ticker={<NewsTicker items={market.tickerItems} />}
       board={<MarketBoard beans={market.beans} />}
       controls={
         <HostControls
           beanOptions={beanCatalog}
-          signalCount={market.tick}
-          activeEventCount={market.activeEvents.length}
+          latestEvent={market.activeEvents[0]}
           onRandomizeMarket={handleRandomizeMarket}
           onRandomEvent={handleRandomEvent}
           onSell={handleSell}
