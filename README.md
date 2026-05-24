@@ -1,75 +1,15 @@
-# React + TypeScript + Vite
+# Bean Street
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bean Street is a commodity exchange where beans are treated with the seriousness of a financial crisis.
 
-Currently, two official plugins are available:
+This companion web-app is designed to be used alongside the [Bohnanza card game](https://boardgamegeek.com/boardgame/11/bohnanza).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## React Compiler
+One host runs the floor while bean listings swing between glory and disaster. Headlines flare up, the ticker keeps talking, and every tiny move is presented like a market-shaking event.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+It is a small host-driven market board built for quick rounds, demos, and general bean-related overreaction. The host can trigger random events, force selloffs, pair beans in trades, and reset the market, with the board instantly updating its rankings, momentum, sentiment, headline copy, and ticker chatter.
 
-Note: This will impact Vite dev & build performances.
+For contributor notes, repo structure, and development workflow, see `docs/DEVELOPMENT.md`. For running the app live as the operator, see `docs/HOST.md`.
 
-## Expanding the ESLint configuration
+![Bean Street screenshot](src/assets/been-street-screenshot.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
