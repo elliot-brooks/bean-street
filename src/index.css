@@ -1,0 +1,106 @@
+:root {
+  --bg: #07111b;
+  --bg-deep: #03070d;
+  --panel: rgba(13, 22, 35, 0.88);
+  --border: rgba(203, 219, 252, 0.12);
+  --border-strong: rgba(233, 209, 91, 0.28);
+  --text: #d3ddea;
+  --text-strong: #f6f8fb;
+  --text-soft: #93a6bf;
+  --bull: #60e2a8;
+  --bear: #ff6f61;
+  --accent-warm: #e4c64b;
+  --accent-cool: #66b8ff;
+  --shadow-panel: 0 24px 80px rgba(0, 0, 0, 0.34);
+
+  --font-body: 'IBM Plex Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-display: 'Avenir Next Condensed', 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
+  font: 17px/1.45 var(--font-body);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(50, 118, 255, 0.18), transparent 34%),
+    radial-gradient(circle at right, rgba(228, 198, 75, 0.14), transparent 22%),
+    linear-gradient(180deg, var(--bg), var(--bg-deep));
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100svh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent 80%);
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: clamp(2.7rem, 5vw, 4.8rem);
+  line-height: 0.95;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 2vw, 2.4rem);
+  line-height: 1;
+}
+
+h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent-warm);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
