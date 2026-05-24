@@ -77,7 +77,7 @@ export function HostControls({
               </option>
             ))}
           </select>
-          <button className="host-button" type="button" onClick={() => onSell(sellBean)}>
+          <button className="host-button host-button--accent" type="button" onClick={() => onSell(sellBean)}>
             Mark Bean Sold
           </button>
         </div>
@@ -104,7 +104,7 @@ export function HostControls({
             ))}
           </select>
           <button
-            className="host-button"
+            className="host-button host-button--accent"
             type="button"
             onClick={() => onTrade(tradeFirst, tradeSecond)}
             disabled={tradeFirst === tradeSecond}

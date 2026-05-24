@@ -294,8 +294,14 @@
   gap: 14px;
 }
 
-.host-panel__inline-action--split {
+.host-panel__inline-action {
   display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.host-panel__inline-action--split {
   grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
 }
 
@@ -308,6 +314,11 @@ select {
   color: var(--text-strong);
   padding: 0 14px;
   font: inherit;
+}
+
+.host-panel__inline-action .host-button,
+.host-panel__inline-action select {
+  width: 100%;
 }
 
 .host-button {
@@ -335,6 +346,10 @@ select:hover {
 
 .host-button--accent {
   background: linear-gradient(135deg, rgba(228, 198, 75, 0.25), rgba(255, 137, 72, 0.2));
+}
+
+.host-button--accent:hover {
+  background: linear-gradient(135deg, rgba(228, 198, 75, 0.33), rgba(255, 137, 72, 0.28));
 }
 
 .host-button--primary {
@@ -378,6 +393,11 @@ select:hover {
   .app-shell__ticker,
   .app-shell__main {
     width: min(100%, calc(100% - 20px));
+  }
+
+  .host-panel__inline-action,
+  .host-panel__inline-action--split {
+    grid-template-columns: 1fr;
   }
 
   .breaking-news,
