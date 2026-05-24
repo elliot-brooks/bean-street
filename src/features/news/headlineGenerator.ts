@@ -4,6 +4,7 @@ import type { BeanMarketState, MarketEvent, MarketRoundSummary } from '../../typ
 
 const byDeltaDesc = (left: BeanMarketState, right: BeanMarketState) => right.delta - left.delta
 const formatMultiple = (value: number) => `x${value.toFixed(2)}`
+const shortName = (name: string): string => name.replace(/ bean/gi, '')
 
 export const createOpeningTicker = (): string[] => [
   'Welcome to Bean Street, where beans are discussed with absurd seriousness.',
@@ -40,7 +41,7 @@ export const buildRoundSummary = (
 
   if (!winner || !loser) {
     return {
-      headline: 'THE MARKET STALLS WHILE COMMENTATORS PANIC ANYWAY',
+      headline: 'MARKET FLAT, COMMENTATORS LOUD',
       tickerItems: createOpeningTicker(),
     }
   }
@@ -49,7 +50,7 @@ export const buildRoundSummary = (
   const loserBean = beanById[loser.beanId]
 
   return {
-    headline: `${winnerBean.name.toUpperCase()} LEADS WHILE ${loserBean.name.toUpperCase()} FACES TOUGH QUESTIONS`,
+    headline: `${shortName(winnerBean.name).toUpperCase()} LEADS, ${shortName(loserBean.name).toUpperCase()} WOBBLES`,
     tickerItems: [
       `${winnerBean.ticker} now ${formatMultiple(winner.value)} after a ${formatMultiple(winner.delta)} move`,
       `${loserBean.ticker} retreats to ${formatMultiple(loser.value)} as confidence evaporates`,

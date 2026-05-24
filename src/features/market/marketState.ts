@@ -8,7 +8,7 @@ export const createInitialMarketState = (): MarketState => ({
   tick: 1,
   beans: createInitialBeansState(),
   activeEvents: [],
-  latestHeadline: 'BEAN STREET OPENS WITH OVERCONFIDENT GUIDANCE',
+  latestHeadline: 'BEAN STREET OPENS HOT',
   tickerItems: createOpeningTicker(),
 })
 
@@ -20,7 +20,7 @@ export const createRandomizedMarketState = (): MarketState => {
     tick: Math.floor(Math.random() * 8) + 4,
     beans,
     activeEvents: [],
-    latestHeadline: 'OPENING BELL CANCELLED AS HOST CUTS STRAIGHT TO CHAOS',
+    latestHeadline: 'MARKET OPENS IN FULL CHAOS',
     tickerItems: summary.tickerItems,
   }
 }

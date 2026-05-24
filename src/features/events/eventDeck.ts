@@ -1,33 +1,35 @@
 import { beanCatalog, beanIds } from '../../data/beans'
 import type { BeanId, RandomMarketEvent, SelloffEvent, TradeEvent } from '../../types/market'
 
+const shortName = (name: string): string => name.replace(/ bean/gi, '')
+
 const randomTemplates = [
   {
     label: 'Export Boom',
     impact: 0.28,
     duration: 1,
-    makeHeadline: (name: string) => `${name.toUpperCase()} EXPORT BOOM STUNS TRADERS`,
+    makeHeadline: (name: string) => `${shortName(name).toUpperCase()} EXPORT BOOM`,
     makeTicker: (ticker: string) => `${ticker} jumps on sudden overseas demand`,
   },
   {
     label: 'Bean Blight',
     impact: -0.26,
     duration: 1,
-    makeHeadline: (name: string) => `FEARS OF ${name.toUpperCase()} BLIGHT SHAKE THE FLOOR`,
+    makeHeadline: (name: string) => `${shortName(name).toUpperCase()} BLIGHT SCARE`,
     makeTicker: (ticker: string) => `${ticker} hit by crop anxiety and doom chatter`,
   },
   {
     label: 'Festival Demand',
     impact: 0.18,
     duration: 1,
-    makeHeadline: (name: string) => `${name.toUpperCase()} FESTIVAL BUYING SPREE IGNITES`,
+    makeHeadline: (name: string) => `${shortName(name).toUpperCase()} FESTIVAL SURGE`,
     makeTicker: (ticker: string) => `Street desks call ${ticker} the party bean of the week`,
   },
   {
     label: 'Commodity Bubble',
     impact: 0.12,
     duration: 1,
-    makeHeadline: () => 'BEAN STREET WHISPERS OF ANOTHER COMMODITY BUBBLE',
+    makeHeadline: () => 'BEAN BUBBLE FEARS RISE',
     makeTicker: () => 'Analysts urge calm while everyone ignores them',
     marketWide: true,
   },
@@ -35,7 +37,7 @@ const randomTemplates = [
     label: 'Market Panic',
     impact: -0.12,
     duration: 1,
-    makeHeadline: () => 'BROAD MARKET PANIC SENDS BEAN DESK INTO MELTDOWN',
+    makeHeadline: () => 'MARKET PANIC HITS BEAN STREET',
     makeTicker: () => 'Every bean suddenly looks overvalued to somebody',
     marketWide: true,
   },
@@ -92,7 +94,7 @@ export const createSelloffEvent = (beanId: BeanId): SelloffEvent => {
     impact: -0.18,
     duration: 1,
     target: beanId,
-    headline: `${bean.name.toUpperCase()} HIT BY AGGRESSIVE PROFIT TAKING`,
+    headline: `${shortName(bean.name).toUpperCase()} HIT BY SELLING`,
     ticker: `Heavy selling pressure lands on ${bean.ticker}`,
   }
 }
@@ -112,7 +114,7 @@ export const createTradeEvent = (first: BeanId, second: BeanId): TradeEvent => {
     impact: 0.12,
     duration: 1,
     targets: [first, second],
-    headline: `${firstBean.name.toUpperCase()} AND ${secondBean.name.toUpperCase()} SPIKE ON TRADE CHATTER`,
+    headline: `${shortName(firstBean.name).toUpperCase()} + ${shortName(secondBean.name).toUpperCase()} SPIKE`,
     ticker: `${firstBean.ticker}/${secondBean.ticker} cross-trade lights up the floor`,
   }
 }
