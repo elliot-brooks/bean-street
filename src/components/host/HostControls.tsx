@@ -27,8 +27,8 @@ const describeEvent = (event: MarketEvent | undefined, beanOptions: BeanDefiniti
       return `${getBeanName(event.targets[0])} and ${getBeanName(event.targets[1])} marked traded.`
     case 'random':
       return event.target === 'market'
-        ? `Random event: ${event.label} hit the whole market.`
-        : `Random event: ${event.label} hit ${getBeanName(event.target)}.`
+        ? `${event.label} hit the whole market.`
+        : `${event.label} hit ${getBeanName(event.target)}.`
     default:
       return event satisfies never
   }

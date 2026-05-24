@@ -26,6 +26,11 @@
   padding: 20px 0 28px;
 }
 
+.app-shell__board,
+.app-shell__controls {
+  display: flex;
+}
+
 .breaking-news {
   border: 1px solid var(--border-strong);
   background:
@@ -52,19 +57,16 @@
 }
 
 .breaking-news__headline-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: start;
+  display: block;
   margin-top: 14px;
   min-height: 92px;
 }
 
 .breaking-news__headline {
-  max-width: 18ch;
+  max-width: none;
   width: 100%;
   margin: 0;
-  font-size: clamp(2.1rem, 3.5vw, 3.6rem);
+  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
   line-height: 0.98;
   max-height: calc(0.98em * 2);
   overflow: hidden;
@@ -110,6 +112,8 @@
 
 .market-board,
 .host-panel {
+  width: 100%;
+  height: 100%;
   border: 1px solid var(--border);
   border-radius: 28px;
   background: var(--panel);
