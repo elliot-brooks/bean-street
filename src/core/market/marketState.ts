@@ -1,4 +1,5 @@
 import { beanById, beanIds } from '../../data/beans'
+import { marketHeadlines } from '../../data/marketContent'
 import { getActiveTagsForBean } from '../events/eventEffects'
 import { applyEventToBean, createInitialBeansState, createRandomizedBeansState } from './marketEngine'
 import { buildRoundSummary, createOpeningTicker } from '../news/headlineGenerator'
@@ -8,7 +9,7 @@ export const createInitialMarketState = (): MarketState => ({
   tick: 1,
   beans: createInitialBeansState(),
   activeEvents: [],
-  latestHeadline: 'BEAN STREET OPENS HOT',
+  latestHeadline: marketHeadlines.opening,
   tickerItems: createOpeningTicker(),
 })
 
@@ -20,7 +21,7 @@ export const createRandomizedMarketState = (): MarketState => {
     tick: Math.floor(Math.random() * 8) + 4,
     beans,
     activeEvents: [],
-    latestHeadline: 'MARKET OPENS IN FULL CHAOS',
+    latestHeadline: marketHeadlines.randomizedOpening,
     tickerItems: summary.tickerItems,
   }
 }

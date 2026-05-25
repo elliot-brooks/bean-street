@@ -1,16 +1,13 @@
 import { beanById, beanIds } from '../../data/beans'
+import { marketHeadlines, openingTickerItems, roundSummaryTemplates } from '../../data/marketContent'
+import { fillCopyTemplate, shortBeanName } from '../../lib/copy'
 import { countBeansTouchedByEvents } from '../events/eventEffects'
 import type { BeanMarketState, MarketEvent, MarketRoundSummary } from '../../types/market'
 
 const byDeltaDesc = (left: BeanMarketState, right: BeanMarketState) => right.delta - left.delta
 const formatMultiple = (value: number) => `x${value.toFixed(2)}`
-const shortName = (name: string): string => name.replace(/ bean/gi, '')
 
-export const createOpeningTicker = (): string[] => [
-  'Welcome to Bean Street, where beans are discussed with absurd seriousness.',
-  'Values are quoted as multipliers, not dollars. Every bean starts as itself.',
-  'Analysts remain confident despite knowing nothing.',
-]
+export const createOpeningTicker = (): string[] => [...openingTickerItems]
 
 const getTopMovers = (beans: Record<string, BeanMarketState>) => {
   const values = Object.values(beans).sort(byDeltaDesc)
@@ -31,8 +28,10 @@ export const buildRoundSummary = (
       activeEvent: incomingEvent,
       tickerItems: [
         incomingEvent.ticker,
-        `${countBeansTouchedByEvents(activeEvents)} bean sectors now under active coverage`,
-        'Recent signals stay on screen so the table can keep overreacting.',
+        fillCopyTemplate(roundSummaryTemplates.incomingEventCoverageTemplate, {
+          COUNT: countBeansTouchedByEvents(activeEvents),
+        }),
+        roundSummaryTemplates.incomingEventContext,
       ],
     }
   }
@@ -41,7 +40,7 @@ export const buildRoundSummary = (
 
   if (!winner || !loser) {
     return {
-      headline: 'MARKET FLAT, COMMENTATORS LOUD',
+      headline: marketHeadlines.flatMarket,
       tickerItems: createOpeningTicker(),
     }
   }
@@ -50,11 +49,23 @@ export const buildRoundSummary = (
   const loserBean = beanById[loser.beanId]
 
   return {
-    headline: `${shortName(winnerBean.name).toUpperCase()} LEADS, ${shortName(loserBean.name).toUpperCase()} WOBBLES`,
+    headline: fillCopyTemplate(roundSummaryTemplates.marketLeaderHeadlineTemplate, {
+      WINNER_SHORT_NAME: shortBeanName(winnerBean.name).toUpperCase(),
+      LOSER_SHORT_NAME: shortBeanName(loserBean.name).toUpperCase(),
+    }),
     tickerItems: [
-      `${winnerBean.ticker} now ${formatMultiple(winner.value)} after a ${formatMultiple(winner.delta)} move`,
-      `${loserBean.ticker} retreats to ${formatMultiple(loser.value)} as confidence evaporates`,
-      `${beanIds.length} bean listings remain wildly overdiscussed`,
+      fillCopyTemplate(roundSummaryTemplates.winnerTickerTemplate, {
+        WINNER_TICKER: winnerBean.ticker,
+        WINNER_VALUE: formatMultiple(winner.value),
+        WINNER_DELTA: formatMultiple(winner.delta),
+      }),
+      fillCopyTemplate(roundSummaryTemplates.loserTickerTemplate, {
+        LOSER_TICKER: loserBean.ticker,
+        LOSER_VALUE: formatMultiple(loser.value),
+      }),
+      fillCopyTemplate(roundSummaryTemplates.listedBeansTemplate, {
+        LISTED_BEANS: beanIds.length,
+      }),
     ],
   }
 }

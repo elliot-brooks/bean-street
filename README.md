@@ -11,5 +11,7 @@ It is a small host-driven market board built for quick rounds, demos, and genera
 
 For contributor notes, repo structure, and development workflow, see `docs/DEVELOPMENT.md`. For running the app live as the operator, see `docs/HOST.md`.
 
+To extend the market, add beans in `src/data/beans.ts` and tune headlines/events in `src/data/marketContent.ts`.
+
 ![Bean Street screenshot](src/assets/been-street-screenshot.png)
 

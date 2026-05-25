@@ -1,12 +1,4 @@
-export type BeanId =
-  | 'blue'
-  | 'chili'
-  | 'stink'
-  | 'green'
-  | 'soy'
-  | 'blackEyed'
-  | 'red'
-  | 'garden'
+export type BeanId = string
 
 export type Momentum = 'crashing' | 'slipping' | 'steady' | 'rallying' | 'surging'
 
