@@ -1,6 +1,6 @@
 import { beanById, beanIds } from '../../data/beans'
 import { marketHeadlines, openingTickerItems, roundSummaryTemplates } from '../../data/marketContent'
-import { fillCopyTemplate, shortBeanName } from '../../lib/copy'
+import { fillTemplate, shortBeanName } from '../../lib/template'
 import { countBeansTouchedByEvents } from '../events/eventEffects'
 import type { BeanMarketState, MarketEvent, MarketRoundSummary } from '../../types/market'
 
@@ -28,7 +28,7 @@ export const buildRoundSummary = (
       activeEvent: incomingEvent,
       tickerItems: [
         incomingEvent.ticker,
-        fillCopyTemplate(roundSummaryTemplates.incomingEventCoverageTemplate, {
+        fillTemplate(roundSummaryTemplates.incomingEventCoverageTemplate, {
           COUNT: countBeansTouchedByEvents(activeEvents),
         }),
         roundSummaryTemplates.incomingEventContext,
@@ -49,21 +49,21 @@ export const buildRoundSummary = (
   const loserBean = beanById[loser.beanId]
 
   return {
-    headline: fillCopyTemplate(roundSummaryTemplates.marketLeaderHeadlineTemplate, {
+    headline: fillTemplate(roundSummaryTemplates.marketLeaderHeadlineTemplate, {
       WINNER_SHORT_NAME: shortBeanName(winnerBean.name).toUpperCase(),
       LOSER_SHORT_NAME: shortBeanName(loserBean.name).toUpperCase(),
     }),
     tickerItems: [
-      fillCopyTemplate(roundSummaryTemplates.winnerTickerTemplate, {
+      fillTemplate(roundSummaryTemplates.winnerTickerTemplate, {
         WINNER_TICKER: winnerBean.ticker,
         WINNER_VALUE: formatMultiple(winner.value),
         WINNER_DELTA: formatMultiple(winner.delta),
       }),
-      fillCopyTemplate(roundSummaryTemplates.loserTickerTemplate, {
+      fillTemplate(roundSummaryTemplates.loserTickerTemplate, {
         LOSER_TICKER: loserBean.ticker,
         LOSER_VALUE: formatMultiple(loser.value),
       }),
-      fillCopyTemplate(roundSummaryTemplates.listedBeansTemplate, {
+      fillTemplate(roundSummaryTemplates.listedBeansTemplate, {
         LISTED_BEANS: beanIds.length,
       }),
     ],

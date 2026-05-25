@@ -1,10 +1,17 @@
+import type { BeanId } from '../types/market'
+
+export type MarketEventTemplateTarget = 'single' | 'market' | [BeanId, ...BeanId[]]
+
+// Shared shape for editable event copy in this file.
+// target is optional for single-bean events, can be 'market' for market-wide copy,
+// or a fixed list of bean ids for grouped events.
 export interface MarketEventTemplate {
   label: string
   impact: number
   duration: number
   headlineTemplate: string
   tickerTemplate: string
-  marketWide?: boolean
+  target?: MarketEventTemplateTarget
 }
 
 // Static headline copy used when the board first opens or when no clear movers exist.
@@ -22,8 +29,14 @@ export const openingTickerItems = [
 ]
 
 // Random event templates are safe to extend in-place.
-// Bean-targeted events support {SHORT_NAME} and {TICKER} in both headlineTemplate and tickerTemplate.
-// Market-wide events should set marketWide: true and use plain text because no single bean is injected.
+// Target rules:
+// - Omit target for a single-bean event.
+// - Set target: ['blue', 'green'] for a fixed bean set.
+// - Set target: 'market' for a market-wide event.
+// Supported placeholders:
+// - Single bean: {SHORT_NAME}, {TICKER}
+// - Fixed bean set: {SHORT_NAME_LIST}, {SHORT_NAME_LIST_UPPER}, {TICKER_LIST}, {COUNT}
+// - Market-wide: use plain text
 export const randomEventTemplates: MarketEventTemplate[] = [
   {
     label: 'Export Boom',
@@ -47,12 +60,20 @@ export const randomEventTemplates: MarketEventTemplate[] = [
     tickerTemplate: 'Street desks call {TICKER} the party bean of the week',
   },
   {
+    label: 'Protein Rotation',
+    impact: 0.16,
+    duration: 1,
+    target: ['soy', 'green', 'blackEyed'],
+    headlineTemplate: 'PROTEIN SURGE HITS THE MARKET',
+    tickerTemplate: '{TICKER_LIST} surge together as consumers rotate their diets',
+  },
+  {
     label: 'Commodity Bubble',
     impact: 0.12,
     duration: 1,
     headlineTemplate: 'BEAN BUBBLE FEARS RISE',
     tickerTemplate: 'Analysts urge calm while everyone ignores them',
-    marketWide: true,
+    target: 'market',
   },
   {
     label: 'Market Panic',
@@ -60,11 +81,12 @@ export const randomEventTemplates: MarketEventTemplate[] = [
     duration: 1,
     headlineTemplate: 'MARKET PANIC HITS BEAN STREET',
     tickerTemplate: 'Every bean suddenly looks overvalued to somebody',
-    marketWide: true,
+    target: 'market',
   },
 ]
 
-// Selloff templates always target one bean and support {SHORT_NAME} and {TICKER}.
+// Selloff templates always target one bean.
+// Supported placeholders: {SHORT_NAME}, {TICKER}.
 export const selloffEventTemplate: MarketEventTemplate = {
   label: 'Sell Wall',
   impact: -0.18,

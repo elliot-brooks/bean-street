@@ -1,5 +1,7 @@
 import type { BeanDefinition, BeanId } from '../types/market'
 
+// Bean definitions are edited by hand here.
+// beanIds and beanById below are derived indexes used throughout the app.
 export const beanCatalog: BeanDefinition[] = [
   {
     id: 'blue',

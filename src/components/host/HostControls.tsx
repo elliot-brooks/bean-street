@@ -11,6 +11,18 @@ interface HostControlsProps {
   onReset: () => void
 }
 
+const formatBeanList = (beanNames: string[]): string => {
+  if (beanNames.length <= 1) {
+    return beanNames[0] ?? ''
+  }
+
+  if (beanNames.length === 2) {
+    return `${beanNames[0]} and ${beanNames[1]}`
+  }
+
+  return `${beanNames.slice(0, -1).join(', ')}, and ${beanNames.at(-1)}`
+}
+
 const describeEvent = (event: MarketEvent | undefined, beanOptions: BeanDefinition[]): string => {
   if (!event) {
     return 'No events yet.'
@@ -20,14 +32,20 @@ const describeEvent = (event: MarketEvent | undefined, beanOptions: BeanDefiniti
     return beanOptions.find((bean) => bean.id === beanId)?.name ?? beanId
   }
 
+  const getBeanNames = (beanIds: BeanId[]): string => formatBeanList(beanIds.map(getBeanName))
+
   switch (event.type) {
     case 'selloff':
       return `${getBeanName(event.target)} marked sold.`
     case 'trade':
-      return `${getBeanName(event.targets[0])} and ${getBeanName(event.targets[1])} marked traded.`
+      return `${getBeanNames(event.targets)} marked traded.`
     case 'random':
-      return event.target === 'market'
-        ? `${event.label} hit the whole market.`
+      if (event.target === 'market') {
+        return `${event.label} hit the whole market.`
+      }
+
+      return Array.isArray(event.target)
+        ? `${event.label} hit ${getBeanNames(event.target)}.`
         : `${event.label} hit ${getBeanName(event.target)}.`
     default:
       return event satisfies never

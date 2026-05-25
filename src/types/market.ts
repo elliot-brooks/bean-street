@@ -37,7 +37,7 @@ export interface MarketEventBase {
 
 export interface RandomMarketEvent extends MarketEventBase {
   type: 'random'
-  target: BeanId | 'market'
+  target: BeanId | BeanId[] | 'market'
   ticker: string
 }
 

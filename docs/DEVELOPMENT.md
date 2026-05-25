@@ -92,9 +92,23 @@ Add one object to `randomEventTemplates` in `src/data/marketContent.ts`:
 }
 ```
 
-Bean-targeted random events support `{SHORT_NAME}` and `{TICKER}` in both templates.
+Single-bean random events are the default and support `{SHORT_NAME}` and `{TICKER}`.
 
-For market-wide events, set `marketWide: true` and use plain text templates.
+For grouped random events, set `target` to a fixed list of bean ids.
+Supported placeholders are `{SHORT_NAME_LIST}`, `{SHORT_NAME_LIST_UPPER}`, `{TICKER_LIST}`, and `{COUNT}`:
+
+```ts
+{
+  label: 'Protein Rotation',
+  impact: 0.16,
+  duration: 1,
+  target: ['soy', 'green', 'blackEyed'],
+  headlineTemplate: 'PROTEIN SURGE HITS THE MARKET',
+  tickerTemplate: '{TICKER_LIST} surge together as consumers rotate their diets',
+}
+```
+
+For market-wide events, set `target: 'market'` and use plain text templates.
 
 `src/data/marketContent.ts` is the source of truth for which placeholders are valid in each template family.
 
