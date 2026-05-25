@@ -25,7 +25,10 @@ export const marketHeadlines = {
 export const openingTickerItems = [
   'Welcome to Bean Street, where beans are discussed with absurd seriousness.',
   'Values are quoted as multipliers, not dollars. Every bean starts as itself.',
+  'Beans are not a real investment, but they are a real good time.',
   'Analysts remain confident despite knowing nothing.',
+  'Follow the news for live updates and market analysis that will never age well.',
+  'This is not financial advice, just a fun way to watch some beans wiggle.',
 ]
 
 // Random event templates are safe to extend in-place.

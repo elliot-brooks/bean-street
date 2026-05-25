@@ -27,7 +27,7 @@ You run the floor. The goal is not realism. The goal is momentum.
 
 ## Useful Limits
 
-- Only the 4 most recent events stay active.
 - Values are relative multipliers, not money.
 - A bean cannot be traded with itself.
 - Refreshing the page wipes the current session.
+-

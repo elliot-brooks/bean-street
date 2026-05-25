@@ -5,6 +5,8 @@ import { applyEventToBean, createInitialBeansState, createRandomizedBeansState }
 import { buildRoundSummary, createOpeningTicker } from '../news/headlineGenerator'
 import type { MarketEvent, MarketState } from '../../types/market'
 
+const MAX_ACTIVE_EVENTS = 6
+
 export const createInitialMarketState = (): MarketState => ({
   tick: 1,
   beans: createInitialBeansState(),
@@ -27,7 +29,7 @@ export const createRandomizedMarketState = (): MarketState => {
 }
 
 export const applyImmediateEvent = (state: MarketState, event: MarketEvent): MarketState => {
-  const activeEvents = [event, ...state.activeEvents].slice(0, 4)
+  const activeEvents = [event, ...state.activeEvents].slice(0, MAX_ACTIVE_EVENTS)
   const beans = Object.fromEntries(
     beanIds.map((beanId) => {
       const definition = beanById[beanId]
