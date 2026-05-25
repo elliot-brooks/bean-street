@@ -1,12 +1,12 @@
 import { startTransition, useState } from 'react'
 import './App.css'
 import { beanCatalog } from './data/beans'
-import { createSelloffEvent, createTradeEvent, drawRandomEvent } from './features/events/eventDeck'
+import { createSelloffEvent, createTradeEvent, drawRandomEvent } from './core/events/eventDeck'
 import {
   applyImmediateEvent,
   createInitialMarketState,
   createRandomizedMarketState,
-} from './features/market/marketState'
+} from './core/market/marketState'
 import { AppShell } from './components/layout/AppShell'
 import { BreakingNewsBanner } from './components/news/BreakingNewsBanner'
 import { NewsTicker } from './components/news/NewsTicker'

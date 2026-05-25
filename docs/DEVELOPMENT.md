@@ -21,7 +21,7 @@ src/
     market/                Board and bean cards
     news/                  Headline banner and ticker
   data/                    Static bean catalog
-  features/
+  core/
     events/                Event factories and event helpers
     market/                Pricing engine and market state
     news/                  Headline and ticker generation
@@ -40,15 +40,13 @@ src/
 ## Important Files
 
 - `src/App.tsx`: owns market state and wires the UI.
-- `src/features/market/marketState.ts`: initial state, randomized state, event application.
-- `src/features/market/marketEngine.ts`: bean-level pricing rules.
-- `src/features/events/eventDeck.ts`: random, selloff, and trade event creation.
-- `src/features/news/headlineGenerator.ts`: headline and ticker summaries.
+- `src/core/market/marketState.ts`: initial state, randomized state, event application.
+- `src/core/market/marketEngine.ts`: bean-level pricing rules.
+- `src/core/events/eventDeck.ts`: random, selloff, and trade event creation.
+- `src/core/news/headlineGenerator.ts`: headline and ticker summaries.
 - `src/components/host/HostControls.tsx`: host actions available in the UI.
 
 ## Working Rules
 
-- Keep market behavior in `features/`, not in components.
+- Keep market behavior in `core/`, not in components.
 - Update `src/types/market.ts` first when changing state or event shapes.
-- Refreshing the page resets the market.
-- The most recent 4 events remain active in the state summary.
