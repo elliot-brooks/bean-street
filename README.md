@@ -1,5 +1,7 @@
 # Bean Street
 
+Use the latest version of bean-street @ [elliot-brooks.github.io/bean-street](https://elliot-brooks.github.io/bean-street/)
+
 Bean Street is a commodity exchange where beans are treated with the seriousness of a financial crisis.
 
 This companion web-app is designed to be used alongside the [Bohnanza card game](https://boardgamegeek.com/boardgame/11/bohnanza).
